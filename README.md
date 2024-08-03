@@ -13,7 +13,7 @@
 
 ### comandos de instalacion 
 ```text
-npm install express sequelize sequelize-typescript mysql2 nodemon ts-node typescript tsyringe  @types/express @types/sequelize @types/node***
+npm install express sequelize sequelize-typescript mysql2 nodemon ts-node typescript tsyringe  @types/express @types/sequelize @types/node
 ```
 
 ```text
