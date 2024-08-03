@@ -54,3 +54,5 @@ project-name/
 ├── README.md/
 └── nodemon.json
 ```
+# Entidad relacion de bd
+![Logo de Mi Proyecto](ejBD.JPG)
