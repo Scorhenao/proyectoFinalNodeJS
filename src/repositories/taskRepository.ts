@@ -1,5 +1,5 @@
 import { injectable } from 'tsyringe';
-import { Task } from '../models';
+import { Task, User } from '../models';
 import { CreationAttributes } from 'sequelize';
 
 @injectable() //Significa que la clase es un servicio que puede ser inyectado
@@ -13,7 +13,7 @@ export default class TaskRepository {
     }
 
     async findByUserId(userId: number) {
-        return await Task.findAll({ where: { userId } });
+        return await Task.findAll({ where: { userId }, include:User });
     }
 
     async create(task: CreationAttributes<Task>) {
