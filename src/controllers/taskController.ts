@@ -18,7 +18,7 @@ export default class TaskController {
 
     static async getTasksByUserId(req: Request, res: Response) {
         const taskService = container.resolve(TaskService);
-        const tasks = await taskService.getTasksByUserId(parseInt(req.params.userId));
+        const tasks = await taskService.getTasksByUserId(parseInt(req.params.userId)); 
         res.json(tasks);
     }
 
