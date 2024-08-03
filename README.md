@@ -1,0 +1,15 @@
+### uso de dependencias
+express: Framework web para Node.js.
+sequelize: ORM para Node.js.
+sequelize-typescript: Decoradores de TypeScript para Sequelize.
+mysql2: Driver de MySQL para Node.js.
+nodemon: Herramienta para reiniciar automáticamente la aplicación cuando se detectan cambios.
+ts-node: Ejecuta TypeScript directamente en Node.js.
+typescript: Lenguaje de programación que añade tipado estático a JavaScript.
+tsyringe: Contenedor de inyección de dependencias para TypeScript.
+@types/express: Definiciones de tipos para Express.
+@types/sequelize: Definiciones de tipos para Sequelize.
+@types/node: Definiciones de tipos para Node.js.
+
+### comandos de instalacion 
+npm install express sequelize sequelize-typescript mysql2 nodemon ts-node typescript tsyringe @types/express @types/sequelize @types/node
