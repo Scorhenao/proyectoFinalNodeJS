@@ -16,6 +16,9 @@
 npm install express sequelize sequelize-typescript mysql2 nodemon ts-node typescript tsyringe  @types/express @types/sequelize @types/node
 ```
 
+### estructura de proyecto 
+-  estructura de proyecto modular o estructura de proyecto en capas. Este enfoque organiza el código por funcionalidad y responsabilidades, lo que facilita el mantenimiento, la escalabilidad y la comprensión del proyecto
+
 ```text
 project-name/
 ├── src/
