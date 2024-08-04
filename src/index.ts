@@ -1,23 +1,25 @@
-import "reflect-metadata";
-import express from "express";
-import sequelize from "./config/db";
-import router from "./routes/Router";
+import "reflect-metadata"; // Importa 'reflect-metadata', necesario para la inyección de dependencias con 'tsyringe'.
+import express from "express"; // Importa el framework Express para crear el servidor y manejar rutas.
+import sequelize from "./config/db"; // Importa la instancia de Sequelize configurada para conectar con la base de datos.
+import router from "./routes/Router"; // Importa el enrutador de la aplicación que define las rutas de la API.
 
-const app = express();
-app.use(express.json());
-app.use("/api", router);
+const app = express(); // Crea una nueva aplicación Express.
+app.use(express.json()); // Configura Express para analizar solicitudes con formato JSON.
+app.use("/api", router); // Configura el enrutador para que maneje las rutas bajo el prefijo '/api'.
 
 const startServer = async () => {
   try {
-    await sequelize.authenticate();
-    console.log("Database connected!");
-    await sequelize.sync();
-    app.listen(3000, () => {
-      console.log("Server started on port 3000");
+    await sequelize.authenticate(); // Intenta autenticar la conexión a la base de datos.
+    console.log("Database connected!"); // Mensaje de éxito si la conexión a la base de datos es exitosa.
+    
+    await sequelize.sync(); // Sincroniza los modelos con la base de datos, creando tablas si no existen.
+    
+    app.listen(3000, () => { // Inicia el servidor en el puerto 3000.
+      console.log("Server started on port 3000"); // Mensaje de éxito cuando el servidor está en funcionamiento.
     });
   } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    console.error("Unable to connect to the database:", error); // Mensaje de error si no se puede conectar a la base de datos.
   }
 };
 
-startServer();
+startServer(); // Llama a la función para iniciar el servidor.
