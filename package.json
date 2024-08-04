@@ -7,7 +7,7 @@
     "start": "nodemon"
   },
   "keywords": [],
-  "author": "",
+  "author": "Scorhenao",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^22.1.0",
