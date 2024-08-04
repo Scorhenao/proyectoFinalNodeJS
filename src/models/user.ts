@@ -8,6 +8,8 @@ import {
   HasMany, // Decorador para definir una relación de uno a muchos.
 } from "sequelize-typescript";
 import { Task } from './task'; // Importa el modelo Task para establecer relaciones.
+import bcrypt from 'bcrypt';
+
 
 @Table({
   tableName: "users", // Nombre de la tabla en la base de datos.
@@ -45,7 +47,26 @@ export class User extends Model {
   })
   password!: string;
 
+  // Define la columna 'role' con tipo STRING que no puede ser nula.
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  role!: 'premium' | 'normal';
+  
   // Define la relación de uno a muchos con el modelo Task.
   @HasMany(() => Task)
   task!: Task[];
+
+  // Método para cifrar la contraseña antes de guardar el usuario
+  async setPassword(password: string) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    this.password = hashedPassword;
+  }
+
+  // Método para verificar la contraseña
+  async validatePassword(password: string): Promise<boolean> {
+      return await bcrypt.compare(password, this.password);
+  }
+
 }
