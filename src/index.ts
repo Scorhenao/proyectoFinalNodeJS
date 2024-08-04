@@ -2,12 +2,15 @@ import "reflect-metadata"; // Importa 'reflect-metadata', necesario para la inye
 import express from "express"; // Importa el framework Express para crear el servidor y manejar rutas.
 import sequelize from "./config/db"; // Importa la instancia de Sequelize configurada para conectar con la base de datos.
 import router from "./routes/Router"; // Importa el enrutador de la aplicación que define las rutas de la API.
+import { errorHandler } from "./middlewares/errorMiddleware"; // Importa el middleware para manejar errores.
 
 const app = express(); // Crea una nueva aplicación Express.
 app.use(express.json()); // Configura Express para analizar solicitudes con formato JSON.
 app.use("/api", router); // Configura el enrutador para que maneje las rutas bajo el prefijo '/api'.
 
-const startServer = async () => {
+app.use(errorHandler); // Aplica el middleware de manejo de errores.
+
+const startServer = async () => { // Función asíncrona para iniciar el servidor.
   try {
     await sequelize.authenticate(); // Intenta autenticar la conexión a la base de datos.
     console.log("Database connected!"); // Mensaje de éxito si la conexión a la base de datos es exitosa.
