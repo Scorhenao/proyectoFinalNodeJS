@@ -20,8 +20,42 @@ export default class UserController {
 
   // Método estático para crear un nuevo usuario.
   static async createUser(req: Request, res: Response) {
-    const userService = container.resolve(UserService); // Resuelve una instancia de UserService desde el contenedor.
-    const user = await userService.createUser(req.body); // Llama al método createUser del servicio de usuarios, pasando los datos del nuevo usuario como parámetro.
-    res.status(201).json(user); // Envía el usuario creado como respuesta en formato JSON, con el código de estado 201 (Created).
+    const { name, email, password, role } = req.body;
+  
+    // Validar que todos los campos requeridos estén presentes
+    if (!name || !email || !password || !role) {
+      return res.status(400).json({ message: 'All fields (name, email, password, role) are required' });
+    }
+  
+    // Validar que el rol sea válido
+    if (role !== 'premium' && role !== 'normal') {
+      return res.status(400).json({ message: 'Role must be "premium" or "normal"' });
+    }
+  
+    try {
+      const userService = container.resolve(UserService);
+      const user = await userService.createUser(req.body);
+      res.status(201).json(user); // Responder con el usuario creado
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(400).json({ message: error.message });
+      } else {
+        res.status(400).json({ message: 'An unknown error occurred' });
+      }
+    }
+  }
+
+  static async login(req: Request, res: Response) {
+    try {
+      const userService = container.resolve(UserService);
+      const token = await userService.login(req.body.email, req.body.password);
+      res.json({ message: "Login successful", token });
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(400).json({ message: error.message });
+      } else {
+        res.status(400).json({ message: "An unknown error occurred" });
+      }
+    }
   }
 }
