@@ -1,13 +1,35 @@
 {
-    "compilerOptions": {
-      "target": "ES2020",
-      "module": "commonjs",
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true
-    },
-    "include": ["src"]
-  }
+  "compilerOptions": {
+    // Define la versión de JavaScript a la que se compilará el código TypeScript.
+    "target": "ES2020",
+
+    // Especifica el sistema de módulos que TypeScript utilizará en la salida (CommonJS para Node.js).
+    "module": "commonjs",
+
+    // Activa todas las comprobaciones estrictas de TypeScript para mejorar la seguridad del código.
+    "strict": true,
+
+    // Permite la interoperabilidad entre módulos CommonJS y ES6.
+    "esModuleInterop": true,
+
+    // Omite la comprobación de tipos en los archivos de declaración (*.d.ts).
+    "skipLibCheck": true,
+
+    // Asegura que los nombres de los archivos tengan una capitalización consistente.
+    "forceConsistentCasingInFileNames": true,
+
+    // Habilita el uso de decoradores en el código TypeScript.
+    "experimentalDecorators": true,
+
+    // Habilita la generación de metadatos para los decoradores.
+    "emitDecoratorMetadata": true,
+
+    // Especifica las carpetas donde TypeScript buscará los archivos de definición de tipos.
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ]
+  },
+  // Indica las carpetas y archivos que TypeScript debe incluir en la compilación.
+  "include": ["src"]
+}
