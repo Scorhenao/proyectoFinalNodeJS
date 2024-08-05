@@ -9,7 +9,10 @@ export default class UserRepository {
     }
 
     // Método para obtener un usuario específico por su ID.
-    async findById(id: number) {
+    async findById(id: number): Promise<User |null> {
+        if (isNaN(id)) { // Verifica si el id es NaN
+            throw new Error('Invalid user ID');
+        }
         return await User.findByPk(id); // Utiliza el método findByPk de Sequelize para obtener un usuario por su clave primaria (ID).
     }
 
@@ -30,5 +33,14 @@ export default class UserRepository {
             return await user.update(updates); // Actualiza los campos del usuario y guarda los cambios en la base de datos.
         }
         return null; // Devuelve null si el usuario no se encuentra.
+    }
+
+    // Método para iniciar sesion con un usuario existente por su correo y contraseña.
+    async login (email:string, password:string):Promise<boolean>{
+        const user = await this.findByEmail(email);
+        if (!user || !(await user.validatePassword(password))) {
+            return false;
+        }
+        return true;
     }
 }

@@ -16,17 +16,18 @@ export default class UserService {
 
   // Método para obtener un usuario por su ID.
   async getUserById(id: number) {
+    if (isNaN(id)) { // Verifica si el id no es un número válido
+      throw new Error('Invalid user ID');
+  }
     // Llama al método findById del repositorio de usuarios para obtener un usuario específico por su ID.
     return await this.userRepository.findById(id);
   }
 
   // Método para obtener un usuario por su correo electrónico.
   // Devuelve una promesa que se resuelve en un usuario o nulo si no se encuentra el usuario.
-  async getUserByEmail(email: string): Promise<User | null> {
-    // Llama al método findByEmail del repositorio de usuarios para obtener un usuario específico por su correo electrónico.
-    return await this.userRepository.findByEmail(email);
+    async getUserByEmail(email: string): Promise<User | null> {
+      return await this.userRepository.findByEmail(email);
   }
-
 
   // Método para crear un nuevo usuario.
   async createUser(userData: { name: string, email: string, password: string, role: 'premium' | 'normal' }) {

@@ -22,18 +22,16 @@ export default class AuthController {
 
     // Método estático para iniciar sesión.
     static async login(req: Request, res: Response) {
-        const { email, password } = req.body; // Extrae el email y la contraseña del cuerpo de la solicitud.
-
-        const userService = container.resolve(UserService); // Resuelve una instancia del servicio de usuarios desde el contenedor de dependencias.
-        const user = await userService.getUserByEmail(email); // Busca al usuario por su email usando el servicio de usuarios.
-
-        // Verifica si el usuario existe y si la contraseña proporcionada es correcta.
-        if (!user || user.password !== password) {
-            return res.status(401).json({ message: 'Invalid credentials' }); // Devuelve un error 401 si las credenciales son inválidas.
+        const { email, password } = req.body;
+    
+        const userService = container.resolve(UserService);
+        const user = await userService.getUserByEmail(email);
+    
+        if (!user || !(await user.validatePassword(password))) {
+            return res.status(401).json({ message: 'Invalid credentials' });
         }
-
-        // Genera un token JWT con el id y rol del usuario.
+    
         const token = jwt.sign({ id: user.id, role: user.role }, SECRET_KEY, { expiresIn: '1h' });
-        res.json({ token }); // Devuelve el token JWT generado.
+        res.json({ token });
     }
 }
