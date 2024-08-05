@@ -38,8 +38,13 @@ project-name/
 │ │ └── container.ts
 │ │ └── db.ts
 │ ├── controllers/
+│ │ ├── authController.ts
 │ │ ├── taskController.ts
 │ │ └── userController.ts
+| | └── ...
+│ ├── middlewares/
+│ │ ├── authMiddleware.ts
+│ │ └── errorMiddleware.ts
 | | └── ...
 │ ├── models/
 │ │ ├── index.ts
@@ -51,6 +56,7 @@ project-name/
 │ │ └── userRepository.ts
 | | └── ...
 │ ├── routes/
+│ │ ├── authRoutes.ts
 │ │ ├── index.ts
 │ │ ├── Router.ts
 │ │ ├── taskRoutes.ts
@@ -60,7 +66,14 @@ project-name/
 │ │ ├── taskService.ts
 │ │ └── userService.ts
 | | └── ...
+│ ├── types/
+│ │ └── express.d.ts
+| | └── ...
 │ └── index.ts
+├── testEnpoints/
+│ ├── taskEnpoints.txt
+│ └── userEnpoints.txt
+| └── ...
 ├── .gitignore/
 ├── package-lock.json
 ├── package.json
