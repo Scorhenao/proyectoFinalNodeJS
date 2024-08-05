@@ -82,7 +82,25 @@ project-name/
 └── nodemon.json
 ```
 
-# Copiler options 
+# nodemon.json config
+```text
+{
+    "watch": [
+        "src"
+    ],
+    "ext": "ts",
+    "exec": "ts-node ./src/index.ts"
+}
+```
+
+# packgage.json scripts
+```text
+ "scripts": {
+    "start": "nodemon"
+  },
+```
+
+# Compiler options 
 
 ```text
 {
