@@ -13,8 +13,22 @@ export default class UserRepository {
         return await User.findByPk(id); // Utiliza el método findByPk de Sequelize para obtener un usuario por su clave primaria (ID).
     }
 
+    // Método para obtener un usuario específico por su email.
+    async findByEmail(email: string) {
+        return await User.findOne({ where: { email } });
+    }
+
     // Método para crear un nuevo usuario.
-    async create(user: Partial<User>) {
-        return await User.create(user); // Utiliza el método create de Sequelize para insertar un nuevo usuario en la base de datos.
+    async create(userData: { name: string, email: string, password: string, role: 'premium' | 'normal' }) {
+        return await User.create(userData); // Utiliza el método create de Sequelize para crear un nuevo usuario directamente en la base de datos.
+    }
+
+    // Método para actualizar un usuario existente por su ID.
+    async update(id: number, updates: Partial<{ name: string, email: string, password: string, role: 'premium' | 'normal' }>) {
+        const user = await User.findByPk(id); // Encuentra el usuario por su ID.
+        if (user) {
+            return await user.update(updates); // Actualiza los campos del usuario y guarda los cambios en la base de datos.
+        }
+        return null; // Devuelve null si el usuario no se encuentra.
     }
 }
