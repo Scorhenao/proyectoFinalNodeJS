@@ -62,7 +62,6 @@ project-name/
 | | └── ...
 │ └── index.ts
 ├── .gitignore/
-├── nodemon.json
 ├── package-lock.json
 ├── package.json
 ├── node_modules/
