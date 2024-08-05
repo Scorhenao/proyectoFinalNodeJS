@@ -1,3 +1,4 @@
+CREAR UN USUARIO
 http://localhost:3000/api/users/
 verb request = POST
 {
@@ -7,9 +8,15 @@ verb request = POST
   "role": "normal" or "role": "premium"
 }
 
+BUSCAR TODOS LOS USUARIOS
 http://localhost:3000/api/users/
 verb request = GET 
 
+BUSCAR POR ID
+http://localhost:3000/api/users/2
+verb request = GET
+
+INICIAR SESION CON USUARIO
 http://localhost:3000/api/users/login
 verb request = POST
 {
