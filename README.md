@@ -32,7 +32,7 @@ npm install --save-dev @types/node@^22.1.0 @types/sequelize@^4.28.20 nodemon@^3.
 -  estructura de proyecto modular o estructura de proyecto en capas. Este enfoque organiza el código por funcionalidad y responsabilidades, lo que facilita el mantenimiento, la escalabilidad y la comprensión del proyecto
 
 ```text
-project-name/
+PROYECTOFINALNODEJS/
 ├── src/
 │ ├── config/
 │ │ └── container.ts
