@@ -21,8 +21,13 @@ http://localhost:3000/api/tasks/user/1
 verb request = GET
 
 ACTUALIZAR UNA TAREA
-http://localhost:3000/api/tasks/2
+http://localhost:3000/api/tasks/
 verb request = PUT
+{
+  "name": "Lavar la loza",
+  "description": "la loza a las 8pm",
+  "status": true
+}
 
 ELIMINAR UNA TAREA
 http://localhost:3000/api/tasks/2
