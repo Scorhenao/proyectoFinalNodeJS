@@ -20,3 +20,10 @@ BUSCAR TODAS LAS TAREAS DE UN USUARIO
 http://localhost:3000/api/tasks/user/1
 verb request = GET
 
+ACTUALIZAR UNA TAREA
+http://localhost:3000/api/tasks/2
+verb request = PUT
+
+ELIMINAR UNA TAREA
+http://localhost:3000/api/tasks/2
+verb request = DELETE
