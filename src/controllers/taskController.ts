@@ -37,21 +37,12 @@ export default class TaskController {
         res.status(201).json(task); // Envía la tarea creada como respuesta en formato JSON, con el código de estado 201 (Created).
     }
 
-    // Método estático para actualizar una tarea existente.
-    static async updateTask(req: Request, res: Response) {
-        console.log(`Request received for update: ${req.params.id}`); // Agrega este log para depurar
+    // Método estático para actualizar una tarea existente.    
+    static async updateTask(req:Request, res:Response){
         const taskService = container.resolve(TaskService);
-        const updatedTask = await taskService.updateTask(parseInt(req.params.id), req.body);
-    
-        if (!updatedTask) {
-            console.log(`Task with ID ${req.params.id} not updated`); // Agrega este log para depurar
-            return res.status(404).json({ message: 'Task not found' });
-        }
-    
-        res.json(updatedTask);
+        const user = await taskService.updateUser(req.body);
+        res.status(200).json(user);
     }
-    
-    
 
     // Método estático para eliminar una tarea existente.
     static async deleteTask(req: Request, res: Response) {
@@ -62,6 +53,6 @@ export default class TaskController {
             return res.status(404).json({ message: 'Task not found' });
         }
     
-        res.status(204).send();
+        res.status(204).send(); // 204 NOT content
     }
 }

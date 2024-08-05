@@ -28,17 +28,19 @@ export default class TaskRepository {
     }
 
     // Método para actualizar una tarea existente por su ID.
-    async update(id: number, taskData: Partial<CreationAttributes<Task>>) {
-        const [updatedCount, updatedTasks] = await Task.update(taskData, {
-            where: { id },
-            returning: true
+    async update(task:Task){
+        Task.findOne({ where: { id: task.id }}).then(taskParam => {
+            if (taskParam){
+
+                taskParam.name = task.name;
+                taskParam.description = task.description;
+                taskParam.status = task.status
+                taskParam.save().then(() => {
+                    return 'task updated!';
+                })
+            }
+
         });
-    
-        if (updatedCount === 0) {
-            return null; // Asegúrate de que el ID sea correcto y exista una tarea con ese ID.
-        }
-    
-        return updatedTasks[0];
     }
 
     // Método para eliminar una tarea existente por su ID.

@@ -23,7 +23,7 @@ taskRouter.post('/', TaskController.createTask);
 
 // Ruta para actualizar una tarea existente.
 // Cuando se hace una solicitud PUT a '/tasks/:id', se llama al método updateTask del TaskController.
-taskRouter.put('/:id', TaskController.updateTask);
+taskRouter.put('/',TaskController.updateTask);
 
 // Ruta para eliminar una tarea existente.
 // Cuando se hace una solicitud DELETE a '/tasks/:id', se llama al método deleteTask del TaskController.
