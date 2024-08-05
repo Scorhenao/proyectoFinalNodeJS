@@ -1,0 +1,22 @@
+BUSCAR TODAS LAS TAREAS
+http://localhost:3000/api/tasks/
+verb request = GET
+
+OBTENER UNA TAREA ESPECÍFICA
+http://localhost:3000/api/tasks/1
+verb request = GET
+
+CREAR UNA NUEVA TAREA
+http://localhost:3000/api/tasks/
+verb request = POST
+{
+  "name": "Lavar la loza",
+  "description": "la loza a las 8pm",
+  "status": "false",
+  "userId": 1
+}
+
+BUSCAR TODAS LAS TAREAS DE UN USUARIO
+http://localhost:3000/api/tasks/user/1
+verb request = GET
+
