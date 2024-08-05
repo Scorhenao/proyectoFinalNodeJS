@@ -36,4 +36,28 @@ export default class TaskController {
 
         res.status(201).json(task); // Envía la tarea creada como respuesta en formato JSON, con el código de estado 201 (Created).
     }
+
+    // Método estático para actualizar una tarea existente.
+    static async updateTask(req: Request, res: Response) {
+        const taskService = container.resolve(TaskService); // Resuelve una instancia de TaskService desde el contenedor.
+        const updatedTask = await taskService.updateTask(parseInt(req.params.id), req.body); // Llama al método updateTask del servicio de tareas, pasando el ID de la tarea y los datos actualizados como parámetros.
+        
+        if (!updatedTask) {
+            return res.status(404).json({ message: 'Task not found' }); // Envía una respuesta 404 si la tarea no se encuentra.
+        }
+
+        res.json(updatedTask); // Envía la tarea actualizada como respuesta en formato JSON.
+    }
+
+    // Método estático para eliminar una tarea existente.
+    static async deleteTask(req: Request, res: Response) {
+        const taskService = container.resolve(TaskService); // Resuelve una instancia de TaskService desde el contenedor.
+        const result = await taskService.deleteTask(parseInt(req.params.id)); // Llama al método deleteTask del servicio de tareas, pasando el ID de la tarea a eliminar como parámetro.
+        
+        if (!result) {
+            return res.status(404).json({ message: 'Task not found' }); // Envía una respuesta 404 si la tarea no se encuentra.
+        }
+
+        res.status(204).send(); // Envía una respuesta 204 (No Content) si la tarea se elimina correctamente.
+    }
 }

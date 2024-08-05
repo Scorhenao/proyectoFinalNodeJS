@@ -26,6 +26,29 @@ export default class TaskRepository {
     async create(task: CreationAttributes<Task>) {
         return await Task.create(task); // Utiliza el método create de Sequelize para insertar una nueva tarea en la base de datos.
     }
+
+    // Método para actualizar una tarea existente por su ID.
+    async update(id: number, taskData: Partial<CreationAttributes<Task>>) {
+        const [updatedCount, updatedTasks] = await Task.update(taskData, {
+            where: { id },
+            returning: true // Retorna las instancias actualizadas.
+        });
+
+        if (updatedCount === 0) {
+            return null; // Si ninguna fila fue actualizada, retorna null.
+        }
+
+        return updatedTasks[0]; // Retorna la tarea actualizada.
+    }
+
+    // Método para eliminar una tarea existente por su ID.
+    async delete(id: number) {
+        const result = await Task.destroy({
+            where: { id }
+        });
+
+        return result > 0; // Retorna true si se eliminó al menos una fila, de lo contrario false.
+    }
 }
 
 /**

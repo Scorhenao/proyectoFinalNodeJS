@@ -28,4 +28,26 @@ export default class TaskService {
     async createProduct(task: CreationAttributes<Task>) {
         return await this.taskRepository.create(task); // Llama al método create del repositorio de tareas para crear una nueva tarea.
     }
+
+    // Método para actualizar una tarea existente.
+    async updateTask(id: number, taskData: Partial<CreationAttributes<Task>>) {
+        // Obtiene la tarea actual por su ID.
+        const existingTask = await this.taskRepository.findById(id);
+
+        if (!existingTask) {
+            return null; // Si la tarea no existe, retorna null.
+        }
+
+        // Actualiza la tarea con los datos proporcionados.
+        return await this.taskRepository.update(id, taskData);
+    }
+
+    // Método para eliminar una tarea existente.
+    async deleteTask(id: number) {
+        // Intenta eliminar la tarea por su ID.
+        const result = await this.taskRepository.delete(id);
+
+        // Retorna true si la tarea fue eliminada, o false si no se encontró.
+        return result;
+    }
 }
