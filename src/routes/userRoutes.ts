@@ -1,5 +1,6 @@
 import { Router } from 'express'; // Importa el objeto Router de Express para definir rutas específicas para los usuarios.
 import UserController from '../controllers/userController'; // Importa el controlador de usuarios que maneja la lógica de las rutas.
+import authMiddleware from '../middlewares/authMiddleware';
 
 export const userRouter = Router(); // Crea una nueva instancia de Router para manejar las rutas relacionadas con los usuarios.
 
@@ -16,3 +17,5 @@ userRouter.get('/:id', UserController.getUserById);
 // Ruta para crear un nuevo usuario.
 // Cuando se hace una solicitud POST a '/users', se llama al método createUser del UserController.
 userRouter.post('/', UserController.createUser);
+
+userRouter.post('/login', UserController.login); // Ruta para inicio de sesión
