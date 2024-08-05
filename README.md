@@ -171,55 +171,59 @@ PROYECTOFINALNODEJS/
     - ***"./src/types":*** Es una carpeta personalizada para usar tipos específicos del proyecto.
 
 # Flujo de datos
-Cliente
-   |
-   | HTTP Request (e.g., POST /api/register)
-   v
-index.ts 
+```text
+https://app.diagrams.net/#G16Y8i_1eVWklnAM-60orrHMjOj5S0gkEQ#%7B"pageId"%3A"6lZxm9y4vlRnIbbWcTSw"%7D
+```
 
-El punto de entrada de la aplicación. Configura el servidor Express y el enrutador principal.
-   |
-Routes (Router)
-   |
-   | directs to AuthController
-   v
-AuthController
-   |
-   | calls UserService.createUser()
-   v
-UserService
-   |
-   | calls UserRepository.saveUser()
-   v
-UserRepository
-   |
-   | uses User Model to interact with database
-   v
-User Model (defines structure and ORM)
-   |
-   | interacts with database
-   v
-Database
-   |
-   | stores/retrieves data
-   v
-UserRepository
-   |
-   | returns result to UserService
-   v
-UserService
-   |
-   | returns result to AuthController
-   v
-AuthController
-   |
-   | sends response to Router
-   v
-Routes (Router)
-   |
-   | responds to Client
-   v
-Cliente
+- Cliente
+    -  |
+    -   | HTTP Request (e.g., POST /api/register)
+    -   v
+- index.ts 
+
+- El punto de entrada de la aplicación. Configura el servidor Express y el enrutador principal.
+    - |
+- Routes (Router)
+    - |
+    - | directs to AuthController
+    - v
+- AuthController
+    - |
+    - | calls UserService.createUser()
+    - v
+- UserService
+    - |
+    - | calls UserRepository.saveUser()
+    - v
+- UserRepository
+    - |
+    - | uses User Model to interact with database
+    - v
+- User Model (defines structure and ORM)
+    - |
+    - | interacts with database
+    - v
+- Database
+    - |
+    - | stores/retrieves data
+    - v
+- UserRepository
+    - |
+    - | returns result to UserService
+    - v
+- UserService
+    - |
+    - | returns result to AuthController
+    - v
+- AuthController
+    - |
+    - | sends response to Router
+    - v
+- Routes (Router)
+    - |
+    - | responds to Client
+    - v
+- Cliente
 
 ### Resumen de flujo 
 - Router dirige la solicitud al Controller.
