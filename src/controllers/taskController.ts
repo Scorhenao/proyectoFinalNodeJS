@@ -39,25 +39,29 @@ export default class TaskController {
 
     // Método estático para actualizar una tarea existente.
     static async updateTask(req: Request, res: Response) {
-        const taskService = container.resolve(TaskService); // Resuelve una instancia de TaskService desde el contenedor.
-        const updatedTask = await taskService.updateTask(parseInt(req.params.id), req.body); // Llama al método updateTask del servicio de tareas, pasando el ID de la tarea y los datos actualizados como parámetros.
-        
+        console.log(`Request received for update: ${req.params.id}`); // Agrega este log para depurar
+        const taskService = container.resolve(TaskService);
+        const updatedTask = await taskService.updateTask(parseInt(req.params.id), req.body);
+    
         if (!updatedTask) {
-            return res.status(404).json({ message: 'Task not found' }); // Envía una respuesta 404 si la tarea no se encuentra.
+            console.log(`Task with ID ${req.params.id} not updated`); // Agrega este log para depurar
+            return res.status(404).json({ message: 'Task not found' });
         }
-
-        res.json(updatedTask); // Envía la tarea actualizada como respuesta en formato JSON.
+    
+        res.json(updatedTask);
     }
+    
+    
 
     // Método estático para eliminar una tarea existente.
     static async deleteTask(req: Request, res: Response) {
-        const taskService = container.resolve(TaskService); // Resuelve una instancia de TaskService desde el contenedor.
-        const result = await taskService.deleteTask(parseInt(req.params.id)); // Llama al método deleteTask del servicio de tareas, pasando el ID de la tarea a eliminar como parámetro.
-        
+        const taskService = container.resolve(TaskService);
+        const result = await taskService.deleteTask(parseInt(req.params.id));
+    
         if (!result) {
-            return res.status(404).json({ message: 'Task not found' }); // Envía una respuesta 404 si la tarea no se encuentra.
+            return res.status(404).json({ message: 'Task not found' });
         }
-
-        res.status(204).send(); // Envía una respuesta 204 (No Content) si la tarea se elimina correctamente.
+    
+        res.status(204).send();
     }
 }

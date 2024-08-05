@@ -10,7 +10,7 @@ export default class TaskRepository {
     }
 
     // Método para obtener una tarea específica por su ID.
-    async findById(id: number) {
+    async findById(id: number): Promise<Task | null> {
         return await Task.findByPk(id); // Utiliza el método findByPk de Sequelize para obtener una tarea por su clave primaria (ID).
     }
 
@@ -31,14 +31,14 @@ export default class TaskRepository {
     async update(id: number, taskData: Partial<CreationAttributes<Task>>) {
         const [updatedCount, updatedTasks] = await Task.update(taskData, {
             where: { id },
-            returning: true // Retorna las instancias actualizadas.
+            returning: true
         });
-
+    
         if (updatedCount === 0) {
-            return null; // Si ninguna fila fue actualizada, retorna null.
+            return null; // Asegúrate de que el ID sea correcto y exista una tarea con ese ID.
         }
-
-        return updatedTasks[0]; // Retorna la tarea actualizada.
+    
+        return updatedTasks[0];
     }
 
     // Método para eliminar una tarea existente por su ID.
@@ -46,8 +46,8 @@ export default class TaskRepository {
         const result = await Task.destroy({
             where: { id }
         });
-
-        return result > 0; // Retorna true si se eliminó al menos una fila, de lo contrario false.
+    
+        return result > 0;
     }
 }
 

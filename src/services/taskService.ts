@@ -31,23 +31,23 @@ export default class TaskService {
 
     // Método para actualizar una tarea existente.
     async updateTask(id: number, taskData: Partial<CreationAttributes<Task>>) {
-        // Obtiene la tarea actual por su ID.
+        console.log(`Received ID for update: ${id}`); // Agrega este log para depurar
         const existingTask = await this.taskRepository.findById(id);
-
+    
         if (!existingTask) {
-            return null; // Si la tarea no existe, retorna null.
+            console.log(`Task with ID ${id} not found in repository`); // Agrega este log para depurar
+            return null;
         }
-
-        // Actualiza la tarea con los datos proporcionados.
+    
         return await this.taskRepository.update(id, taskData);
     }
+    
+    
 
     // Método para eliminar una tarea existente.
     async deleteTask(id: number) {
-        // Intenta eliminar la tarea por su ID.
         const result = await this.taskRepository.delete(id);
-
-        // Retorna true si la tarea fue eliminada, o false si no se encontró.
         return result;
     }
+
 }
